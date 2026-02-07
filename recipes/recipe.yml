@@ -5,14 +5,18 @@ name: Obsidian-OS
 # description will be included in the image's metadata
 description: This is my personal OS image.
 
-# the base image to build on top of (FROM) and the version tag to use
-base-image: ghcr.io/secureblue/iot-zfs-nvidia-open-hardened
-image-version: 42 # latest is also supported if you want new updates ASAP
+base-image: ghcr.io/secureblue/iot-main-hardened
 
-  modules:
+image-version: latest
+
+cosign-version: none
+nushell-version: none
+
+platforms:
+  - linux/amd64
+  
+modules:
   - from-file: common/common-modules.yml
-  - from-file: common/sericea-modules.yml
-  - from-file: common/desktop-modules.yml
-  - from-file: common/proprietary-modules.yml
+  - from-file: common/server-modules.yml
   - from-file: common/selinux-modules.yml
   - from-file: common/final-modules.yml
