@@ -1,4 +1,4 @@
----
+  ---
 # yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
 # image will be published to ghcr.io/<user>/<name>
 name: Obsidian-OS
@@ -15,8 +15,67 @@ nushell-version: none
 platforms:
   - linux/amd64
   
-modules:
-  - from-file: common/common-modules.yml
-  - from-file: common/server-modules.yml
-  - from-file: common/selinux-modules.yml
-  - from-file: common/final-modules.yml
+  type: dnf
+source: ghcr.io/blue-build/modules@sha256:8e92fcaaef385a1728b8d8224296484260b67126ac83f7ed85b4ae3dde4ad19d
+install:
+  install-weak-deps: false
+  packages:
+    - tmux
+    - yazi
+    - btop
+    - tpm
+    - fzf
+    - zsh
+    - duf
+    - zsh
+    - aria2
+    - ariaTUI
+    - headsetcontrol
+    - mediainfo
+    - bubblejail
+    - usbguard
+    - setools
+    - fscrypt
+    - wl-clipboard
+    - alsa-firmware
+    - homebrew
+    - flatpak
+
+    # yubikey enablement
+    - pam-u2f
+    - pam_yubico
+    - pamu2fcfg
+    - yubikey-manager
+
+    # ensure universal font coverage
+    - google-noto-fonts-all
+
+    # libvirt/qemu/kvm packages
+    - libvirt
+    - libvirt-nss
+    - qemu-device-display-virtio-gpu
+    - qemu-device-display-virtio-vga
+    - qemu-device-usb-redirect
+    - qemu-img
+    - qemu-kvm
+    - qemu-tools
+    - qemu-user
+    - qemu-user-binfmt
+    - virt-install
+    - virt-manager
+    - virt-viewer
+
+remove:
+  packages:
+  
+replace:
+  - from-repo: copr:copr.fedorainfracloud.org:secureblue:packages
+    packages:
+      - old: secureblue-logos
+        new: obsidian-logos
+  - from-repo: fedora
+    packages:
+      - old: OpenCL-ICD-Loader
+        new: ocl-icd
+
+  
