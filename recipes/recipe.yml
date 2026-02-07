@@ -40,6 +40,8 @@ install:
     - alsa-firmware
     - homebrew
     - flatpak
+    - wayland
+    - xwayland
 
     # yubikey enablement
     - pam-u2f
